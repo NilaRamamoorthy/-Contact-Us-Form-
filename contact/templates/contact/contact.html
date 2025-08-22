@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us</title>
+</head>
+<body>
+    <h1>Contact Us</h1>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: green;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <label>Name:</label><br>
+        <input type="text" name="name" value="{{ name|default:'' }}"><br>
+        <span style="color:red;">{{ errors.name }}</span><br>
+
+        <label>Email:</label><br>
+        <input type="email" name="email" value="{{ email|default:'' }}"><br>
+        <span style="color:red;">{{ errors.email }}</span><br>
+
+        <label>Message:</label><br>
+        <textarea name="message">{{ message|default:'' }}</textarea><br>
+        <span style="color:red;">{{ errors.message }}</span><br><br>
+
+        <button type="submit">Send</button>
+    </form>
+</body>
+</html>
